@@ -861,7 +861,13 @@ jobs:
           script: |
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
-
+            
+      - name: Fix script permissions
+        run: |
+          find . -name "*.sh" -exec chmod +x {} \;
+          chmod +x ./flutter/*.sh 2>/dev/null || true
+        shell: bash
+        
       - name: Install dependencies
         run: |
           sudo apt-get update
