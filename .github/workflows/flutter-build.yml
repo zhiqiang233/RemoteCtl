@@ -942,6 +942,8 @@ jobs:
               ANDROID_TARGET=x86
             ;;
           esac
+          # 添加执行权限
+          chmod +x ./flutter/build_android_deps.sh
           if ! ./flutter/build_android_deps.sh "${ANDROID_TARGET}"; then
             find "${VCPKG_ROOT}/" -name "*.log" | while read -r _1; do
               echo "$_1:"
