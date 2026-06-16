@@ -6,7 +6,7 @@ edition = "2021"
 build= "build.rs"
 description = "RemoteCtl Desktop"
 default-run = "rustdesk"
-rust-version = "1.75"
+rust-version = "1.96"
 
 [lib]
 name = "librustdesk"
