@@ -14,7 +14,6 @@ src/version.rs
 *tgz
 cert.pfx
 *.bak
-*svg
 sciter.dll
 **pdb
 src/bridge_generated.rs
