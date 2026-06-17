@@ -2032,7 +2032,18 @@ pub fn create_symmetric_key_msg(their_pk_b: [u8; 32]) -> (Bytes, Bytes, secretbo
 
 #[inline]
 pub fn using_public_server() -> bool {
-    crate::get_custom_rendezvous_server(get_option("custom-rendezvous-server")).is_empty()
+    let custom = get_option("custom-rendezvous-server");
+    if !custom.is_empty() {
+        return false;
+    }
+    // If custom rendezvous server is not set, check if RENDEZVOUS_SERVERS
+    // has been changed from the default public server
+    if !hbb_common::config::RENDEZVOUS_SERVERS.is_empty() {
+        if hbb_common::config::RENDEZVOUS_SERVERS[0] != hbb_common::config::DEFAULT_RENDEZVOUS_SERVER {
+            return false;
+        }
+    }
+    return true;
 }
 
 pub struct ThrottledInterval {
@@ -2100,6 +2111,12 @@ pub fn load_custom_client() {
             return;
         };
         read_custom_client(&data.trim());
+    } else {
+        // Hide powered by me link by default when no custom client config
+        config::BUILTIN_SETTINGS
+            .write()
+            .unwrap()
+            .insert(keys::OPTION_HIDE_POWERED_BY_ME.to_owned(), "Y".to_owned());
     }
 }
 

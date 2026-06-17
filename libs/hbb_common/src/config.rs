@@ -118,6 +118,7 @@ const CHARS: &[char] = &[
 ];
 
 pub const RENDEZVOUS_SERVERS: &[&str] = &["8.141.11.129"];
+pub const DEFAULT_RENDEZVOUS_SERVER: &str = "rs-ny.rustdesk.com";
 pub const RS_PUB_KEY: &str = "4EykJe8bed9m1y8n4bONV0WMgCw9yjlwVrlku7ZMSEY=";
 
 pub const RENDEZVOUS_PORT: i32 = 21116;
