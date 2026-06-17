@@ -2117,6 +2117,11 @@ pub fn load_custom_client() {
             .write()
             .unwrap()
             .insert(keys::OPTION_HIDE_POWERED_BY_ME.to_owned(), "Y".to_owned());
+        // Disable installation tip by default when no custom client config
+        config::HARD_SETTINGS
+            .write()
+            .unwrap()
+            .insert("disable-installation".to_owned(), "Y".to_owned());
     }
 }
 
